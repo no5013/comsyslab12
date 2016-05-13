@@ -13,27 +13,43 @@ import java.util.concurrent.*;
 public class concurrentAdder1 {
 
 
-public static void main(String[] args) {
- 
-  FileReader fr = new FileReader("C:\\Users\\Momo\\Desktop\\");
-  BufferedReader br;
-  
-  long sum = 0;
-  
-  ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()+1);
-  
-  try{
-	  
-	  
-	  
-	  
-	  
-  }
-  
-  
-  
-  
- }
-  
+	public static void main(String[] args) {
+
+
+		long sum = 0;
+
+		ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()+1);
+
+		try{
+			FileReader fr = new FileReader("C:\\Users\\Momo\\Desktop\\data1G.txt");
+			BufferedReader br = new BufferedReader(fr);
+
+
+			int size = Integer.parseInt(br.readLine());
+			System.out.println("Size is "+size);
+			for(int i=0;i<size;i++){
+				
+				sum+=executorService.submit(new Callable<Integer>() {
+					public Integer call() throws NumberFormatException , IOException{
+						return Integer.parseInt(br.readLine());
+					}
+				}).get();
+				System.out.println(i+" of "+size+" : " + sum);
+
+			}
+
+			br.close();
+			fr.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		System.out.println("Sum is "+sum);
+
+	}
+
 
 }
